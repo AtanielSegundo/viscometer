@@ -13,7 +13,7 @@
 
  body {
     background-image: url("https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/background.jpg");
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: 200%; 
     animation: background_flow 120s linear infinite; 
     overflow: hidden;
@@ -32,11 +32,11 @@ body::before {
 
 #ifma_logo {
     position: fixed;
-    bottom: 5px;
-    left: 5px;
-    width: 80px;
-    height: 90px;
-    background-color: rgba(255,255,255,0.75);
+    bottom: 1%;
+    left: 1%;
+    width: 5%;
+    height: 10%;
+    background-color: rgba(255,255,255,0.55);
 }
 
 @keyframes background_flow {
@@ -78,6 +78,18 @@ body::before {
     animation: logo_flow 3s ease-in-out;
 }
 
+#viscometer-logo[alt="usable"] {
+    position: absolute;
+    top: 12%;
+    left: 6%;
+    translate: -50% -50%;
+    filter: invert(1);
+    width: 15vw;
+    height: 15vh;
+    animation: logo_on_top 2s ease-in-out;
+}
+
+
 @keyframes logo_flow {
     0%{
         top: 25%;
@@ -90,6 +102,23 @@ body::before {
     100%{
         top: 35%;
         left: 50%;
+    }
+}
+
+@keyframes logo_on_top {
+    0%{
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        width: 35vw;
+        height: 35vh;
+    }
+    100%{
+        position: absolute;
+        top: 12%;
+        left: 6%;
+        width: 15vw;
+        height: 15vh;
     }
 }
 
@@ -144,18 +173,43 @@ body::before {
     }
 }
 
+.blurry {
+        background-color: rgba(128, 128, 128, 0.5); 
+        backdrop-filter: blur(2px); 
+}
+
+#cronometer{
+    height: 100%;
+}
+#main_frame{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    height: 80%;
+    width : 80%;
+    display: flex;
+}
+
 </style>
 
 <script>
 
+var changeTrigger = "usable";
+var removeAfterTrigger = ["logo-name","start_btn"];    
+
+function generateUsableInterface() {
+    const sys_logo = document.getElementById("viscometer-logo");
+    sys_logo.setAttribute("alt", changeTrigger); 
+    removeAfterTrigger.forEach((e) => {document.getElementById(e).remove()});
+}
+
 </script>
 
 <body>
-    <div  id="start_entry">
-        <img src="https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/body-logo.svg" draggable="false" id="viscometer-logo" alt="viscometer_logo">
-        <p id="logo-name">ViscoSys</p>
-        <button id="start_btn">Cronometrar</button>
-    </div>
+    <img src="https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/body-logo.svg" draggable="false" id="viscometer-logo" alt="viscometer_logo">
+    <p id="logo-name">ViscoSys</p>
+    <button id="start_btn" onclick="generateUsableInterface()">Cronometrar</button>
     <img src="https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/ifma_logo.png" draggable="false" id="ifma_logo">
 </body>
 </html>
