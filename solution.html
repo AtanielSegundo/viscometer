@@ -1,72 +1,160 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Viscometer</title>
+    <title>ViscoSys</title>
     <link rel="icon" href="https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/viscometer.png">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
 <style>
 *{
- font-family: Verdana, Geneva, Tahoma, sans-serif;
+ font-family: Georgia, 'Times New Roman', Times, serif;
  }
 
  body {
     background-image: url("https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/background.jpg");
-    background-repeat: repeat;
-    background-size: 100%; 
+    background-repeat: no-repeat;
+    background-size: 200%; 
     animation: background_flow 120s linear infinite; 
     overflow: hidden;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.55); 
+    z-index: -1; 
+}
+
+#ifma-logo {
+    position: fixed;
+    bottom: 5%;
+    left: 5%;
+    width: 200px;
+    height: 200px;
 }
 
 @keyframes background_flow {
     0% {
         background-position-y: 0%;
         background-position-x: 0%;
+        background-size: 200%;
     }
     25% {
-        background-position-y: 100%; 
-        background-position-x: 100%; 
+        background-position-y: 50%; 
+        background-position-x: 50%; 
+        background-size: 250%;
     }
     50% {
         background-position-y: 0%; 
-        background-position-x: 100%; 
+        background-position-x: 50%; 
+        background-size: 200%;
     }
     75% {
-        background-position-y: 100%; 
+        background-position-y: 50%; 
         background-position-x: 0%; 
+        background-size: 250%;
     }
     100% {
         background-position-y: 0%; 
         background-position-x: 0%; 
+        background-size: 200%;
     }
 }
 
-
 #viscometer-logo {
     position: absolute;
-    top: 30%;
+    top: 35%;
     left: 50%;
     translate: -50% -50%;
     filter: invert(1);
-    width: 40vw;
-    height: 40vh;
+    width: 35vw;
+    height: 35vh;
+    animation: logo_flow 3s ease-in-out;
+}
+
+@keyframes logo_flow {
+    0%{
+        top: 25%;
+        left: 50%;
+        transform: scale(0.5);
+    }
+    50%{
+        transform: scale(1.0);
+    }
+    100%{
+        top: 35%;
+        left: 50%;
+    }
 }
 
 #logo-name {
     position: absolute;
     top: 50%;
     left: 50%;
+    text-align: center;
     translate: -50% -50%;
-    font-size: 10vh;
+    font-size: 5vh;
     color: whitesmoke;
     font-weight: bold;
+    animation: name_flow 5s ease-in-out;
+}
+
+#start_btn{
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    translate: -50% -50%;
+    display: inline-block;
+    font-size: 2rem;
+    color: #000;
+    background-color: rgba(0,0,0,0.4);
+    text-decoration: none;
+    padding: 10px 20px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+    border: 2px solid white;
+    color: whitesmoke;
+    border-radius: 6px;
+    transition: .4s;
+    animation: name_flow 6s ease-in-out;
+}
+
+#start_btn:hover,
+#start_btn:focus {
+    background: black;
+    color: whitesmoke;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.7);
+    transform: scale(.9);
+}
+
+@keyframes name_flow{
+    0%{
+        filter: opacity(0.0);
+    }
+    50%{
+        filter: opacity(0.0);
+    }
+    100%{
+        filter: opacity(1.0);
+    }
 }
 
 </style>
 
+<script>
+
+</script>
+
 <body>
-    <img src="https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/body-logo.svg" draggable="false" id="viscometer-logo" alt="viscometer_logo">
-    <p id="logo-name">Viscometer</p>
+    <div  id="start_entry">
+        <img src="https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/body-logo.svg" draggable="false" id="viscometer-logo" alt="viscometer_logo">
+        <p id="logo-name">ViscoSys</p>
+        <button id="start_btn">Cronometrar</button>
+    </div>
+    <img src="" alt="">
 </body>
 </html>
