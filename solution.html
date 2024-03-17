@@ -1,22 +1,71 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Viscous</title>
-    </head>
-    
-    <script>
+<head>
+    <title>Viscometer</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/viscometer.png">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
 
-    </script>
+<style>
+*{
+ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ }
 
-    <style>
-        
-    </style>
+ body {
+    background-image: url("https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/background.jpg");
+    background-repeat: repeat;
+    background-size: 100%; 
+    animation: background_flow 120s linear infinite; 
+    overflow: hidden;
+}
 
-    <body>
-    
-        
-    
-    </body>
-    
+@keyframes background_flow {
+    0% {
+        background-position-y: 0%;
+        background-position-x: 0%;
+    }
+    25% {
+        background-position-y: 100%; 
+        background-position-x: 100%; 
+    }
+    50% {
+        background-position-y: 0%; 
+        background-position-x: 100%; 
+    }
+    75% {
+        background-position-y: 100%; 
+        background-position-x: 0%; 
+    }
+    100% {
+        background-position-y: 0%; 
+        background-position-x: 0%; 
+    }
+}
+
+
+#viscometer-logo {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    translate: -50% -50%;
+    width: auto;
+    height: auto;
+}
+
+#logo-name {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    font-size: 10vh;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+</style>
+
+<body>
+    <img src="https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/viscometer.png" draggable="false" id="viscometer-logo" alt="viscometer_logo">
+    <p id="logo-name">Viscometer</p>
+</body>
 </html>
