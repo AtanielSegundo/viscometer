@@ -232,7 +232,18 @@ body::before {
 }
 
 #btnsContainer > button{
-    margin: 0 5%;    
+    margin: 0 5%;
+    background-color: transparent;
+    border: none;
+    filter: invert(1.0);    
+}
+
+#btnsContainer > button:hover{
+    filter: invert(0);    
+}
+
+#btnsContainer > button:disabled{
+    filter: invert(0.65);    
 }
 
 #cronometer-nums {
@@ -303,13 +314,17 @@ function generateUsableInterface() {
     cronoH1.id = "cronometer-nums";
     cronoH1.textContent = '00:00';
     
-    const makeCronoBtns = (name) => {
-        const btn = document.createElement('button');
-        btn.id = name; btn.textContent = name;
+    const makeCronoBtns = (altText, imageUrl) => {
+       const btn = document.createElement('button');
+        btn.id = altText;
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.alt = altText;
+        btn.appendChild(img);
         return btn;
     }
 
-    const playButton = makeCronoBtns("play");
+    const playButton = makeCronoBtns("play","https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/play.png");
     function startChronometer() {
         pausedFlag = false;
         chronometerCall = setInterval(chronometer,10);
@@ -323,7 +338,7 @@ function generateUsableInterface() {
     }
     playButton.onclick = startChronometer;
     
-    const pauseButton = makeCronoBtns("pause");
+    const pauseButton = makeCronoBtns("pause","https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/pause.png");
     pauseButton.onclick = pauseChronometer;
     
     document.addEventListener('keypress', function(event) {
@@ -338,7 +353,7 @@ function generateUsableInterface() {
         }
     });
 
-    const resetButton = makeCronoBtns("reset");
+    const resetButton = makeCronoBtns("reset","https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/reset.png");
     resetButton.onclick = () => { 
         clearInterval(chronometerCall);
         document.getElementById('play').removeAttribute('disabled');
