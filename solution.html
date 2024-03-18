@@ -15,6 +15,11 @@
     background-image: url("https://raw.githubusercontent.com/AtanielSegundo/viscometer/master/static/background.jpg");
     background-repeat: repeat;
     background-size: 200%; 
+    text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -moz-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
     animation: background_flow 120s linear infinite; 
     overflow: hidden;
 }
@@ -32,9 +37,9 @@ body::before {
 
 #ifma_logo {
     position: fixed;
-    bottom: 1%;
-    left: 1%;
-    width: 3%;
+    bottom: 0.5%;
+    right: 0.5%;
+    width: 4%;
     height: 8%;
     background-color: rgba(255,255,255,0.55);
 }
@@ -81,7 +86,7 @@ body::before {
 #viscometer-logo[alt="usable"] {
     position: absolute;
     top: 6%;
-    left: 2%;
+    left: 2.5%;
     translate: -50% -50%;
     filter: invert(1);
     width: 6vw;
@@ -116,7 +121,7 @@ body::before {
     100%{
         position: absolute;
         top: 6%;
-        left: 2%;
+        left: 2.5%;
         width: 6vw;
         height: 6vh;
     }
@@ -189,6 +194,8 @@ body::before {
 #parameters{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border-radius: 10px;
     flex: 3;
 }
@@ -204,12 +211,86 @@ body::before {
     animation: fadeIn 3s ease-in-out;
 }
 
-#main_frame > div{
+#main_frame > div {
     height: 100%;
     width: 33.3%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); 
 } 
 
+#density-container{
+    flex: 1;
+    width: 50%;
+    height: 50%;
+}
+
+#densityInput {
+    width: 100%;
+    border: 0;
+    margin-top: 18%;
+    padding: 12px 0;
+    font-family: monospace;
+    height: 28px;
+    font-size: 22px;
+    overflow: hidden;
+    font-weight: 500;
+    border-bottom: 2px solid #c8ccd4;
+    background: none;
+    border-radius: 0;
+    color: whitesmoke;
+    transition: all 0.15s ease;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+#densityInput:hover{
+    background: rgba(34,50,84,0.03);
+}
+
+#densityInput:not(:placeholder-shown) + span{
+    color: #5a667f;
+    transform: translateY(-26px) scale(0.75);
+}
+#densityInput:focus{
+    background: none;
+    outline: none;
+}
+#densityInput:focus + span
+{
+    color: #07f;
+    transform: translateY(-26px) scale(0.75);
+}
+#densityInput:focus + span + .border
+{
+    transform: scaleX(1);
+}
+.Label {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  max-width: 280px;
+}
+span.LabelTitle {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  margin: 0px 4px;
+  font-size: 20px;
+  color: #9098a9;
+  font-weight: 500;
+  transform-origin: 0 0;
+  transition: all 0.66s ease;
+}
+.Label .Border {
+  position: absolute;
+  bottom: 1;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: #07f;
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  transition: all 0.66s ease;
+}
 @keyframes fadeIn {
     0%{
         filter: opacity(0.0);
@@ -261,6 +342,62 @@ body::before {
     box-sizing: border-box; 
 }
 
+.flat-table {
+		margin-bottom: 20px;
+		border-collapse:collapse;
+		font-family: monospace;
+        width: 75%;
+		flex: 3;
+        text-align: center;
+        border: none;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+	}
+	.flat-table th, .flat-table td {
+		box-shadow: inset 0 -1px rgba(0,0,0,0.25), 
+		inset 0 1px rgba(0,0,0,0.25);
+	}
+	.flat-table th {
+		font-weight: bold;
+        font-family: monospace;
+		-webkit-font-smoothing: antialiased;
+		padding: 1em;
+		color: rgba(255,255,255,1);
+		text-shadow: 0 0 1px rgba(0,0,0,0.1);
+		font-size: 1.5em;
+	}
+	.flat-table td {
+		color: #f7f7f7;
+		padding: 0.7em 1em 0.7em 1.15em;
+		text-shadow: 0 0 1px rgba(255,255,255,0.1);
+		font-size: 1.4em;
+        font-family: monospace;
+	}
+	.flat-table tr {
+		-webkit-transition: background 0.3s, box-shadow 0.3s;
+		-moz-transition: background 0.3s, box-shadow 0.3s;
+		transition: background 0.3s, box-shadow 0.3s;
+	}
+	.flat-table-1 {
+		background: rgba(0, 0, 0, 0.75);
+	}
+	.flat-table-1 tr:hover {
+		background: rgba(0,0,0,0.19);
+	}
+	.flat-table-2 tr:hover {
+		background: rgba(0,0,0,0.1);
+	}
+	.flat-table-2 {
+		background: #f06060;
+	}
+	.flat-table-3 {
+		background: #52be7f;
+	}
+	.flat-table-3 tr:hover {
+		background: rgba(0,0,0,0.1);
+	}
+
 </style>
 
 <script>
@@ -273,7 +410,8 @@ let chronometerCall;
 let cronoStartedFlag = false;
 let pausedFlag = true;
 let startTime = 0;
-var seconds,milliseconds;
+var seconds = 0 ;
+var milliseconds = 0.0;
 // Tempo de backup caso pausa, falta de nome melhor 
 var etaTime = 0;
 
@@ -284,13 +422,33 @@ function chronometer() {
     }
     const filterMilli = (milli) => {return Math.floor(milli).toString().slice(0,2);};
     let elapsed = etaTime + performance.now() - startTime;
-    console.log(etaTime);
     seconds = Math.floor(elapsed/1000);
     milliseconds = elapsed % 1000;
     const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
     const formattedMilliseconds = milliseconds < 10 ? `0${filterMilli(milliseconds)}` : `${filterMilli(milliseconds)}`;
     chronometerDisplay.textContent = `${formattedSeconds}:${formattedMilliseconds}`;
 }
+
+// time em segundos, retorna a viscosidade
+let fordFlasksMap = [
+ (time) => { return 0.49*(time-35)  ; },
+ (time) => { return 1.44*(time-18)  ; },
+ (time) => { return 2.31*(time-18)  ; },
+ (time) => { return 3.85*(time-4.49); },
+ (time) => { return 12.1*(time-2);    } 
+]
+// g/cm^3 ; default agua
+var density = 1.0;
+// real deal 
+function getViscositys(time_s, density_g_cm3 = density) {
+    // CentiStokes [cSt]
+    let cinematicViscosity = []; 
+    fordFlasksMap.forEach((e) => {cinematicViscosity.push(e(time_s))});
+    // CentiPoises[cPs]
+    let dynamicViscosity = cinematicViscosity.map((e) => e * density_g_cm3);
+    return { cinematicViscosity, dynamicViscosity }; 
+}
+
 
 function generateUsableInterface() {
     const sys_logo = document.getElementById("viscometer-logo");
@@ -331,6 +489,7 @@ function generateUsableInterface() {
         document.getElementById('play').setAttribute('disabled', '');
     }
     function pauseChronometer(){
+        etaTime =  etaTime+performance.now()-startTime;
         clearInterval(chronometerCall);
         cronoStartedFlag = false;
         pausedFlag = true;
@@ -344,12 +503,14 @@ function generateUsableInterface() {
     document.addEventListener('keypress', function(event) {
         if (event.key === ' ') {
             if (!pausedFlag){
-                etaTime =  etaTime+performance.now()-startTime;
                 pauseChronometer()
             }
             else{
                 startChronometer();
             }
+        }
+        if (event.key == "r" || event.key == "R") {
+            resetButton.click()
         }
     });
 
@@ -374,10 +535,84 @@ function generateUsableInterface() {
     cronometer.append(btnsContainer);
 
     const parameters = createDiv("parameters");
+    
+    // Gerando o density Input 
+    const _container =  document.createElement("div");
+    _container.id = "density-container";
+    const _label     =  document.createElement("label");
+    _label.setAttribute("for","densityInput");
+    _label.className = "Label";
+    const densityInput = document.createElement("input");
+    densityInput.type = "number";
+    densityInput.step = "0.001";
+    densityInput.placeholder = " "
+    densityInput.id = "densityInput";
+    const _span_title  = document.createElement("span");
+    _span_title.className = "LabelTitle";
+    _span_title.innerText = "Densidade [ g/cm^3 ]";
+    const _span_border  = document.createElement("span");
+    _span_border.className = "Border";
+    _label.appendChild(densityInput);
+    _label.appendChild(_span_title);
+    _label.appendChild(_span_border);
+    _container.appendChild(_label);
+
+    function getTd(data) {
+        const _td = document.createElement("td");
+        _td.innerText = data;
+        return _td;
+    }
+    // gerando o result table
+    function getResultTable(density,time) {
+        const _aux = getViscositys(time,density);
+        const cinematycs = _aux.cinematicViscosity; 
+        const dynamics   = _aux.dynamicViscosity;
+        const fordFlasks =  Array.from({ length: fordFlasksMap.length },(_, i) => i + 1); 
+        const table = document.createElement("table");
+        table.id = "result_table";
+        table.classList.add("flat-table");
+        table.classList.add("flat-table-1");
+        const  headers = ["Copo Ford","cSt","cP"]
+        const table_header = document.createElement("thead");
+        headers.forEach((header) => {
+            const _th = document.createElement("th");
+            _th.innerText = header;
+            table_header.appendChild(_th);
+        });
+        table.appendChild(table_header);
+        const table_body = document.createElement("tbody");
+        const trimNegative = (num) => {return num >= 0 ? num : 0;};
+        fordFlasks.forEach(element => {
+            const row = document.createElement("tr");
+            const index = element - 1;
+            row.append(getTd(element));
+            row.append(getTd((trimNegative(cinematycs[index]).toFixed(3))));
+            row.append(getTd((trimNegative(dynamics[index]).toFixed(3))));
+            table_body.append(row);
+        });
+        table.appendChild(table_body);
+        return table;
+    }
+
+    function onTimeTableUpdate() {
+        const parameters_section = document.getElementById("parameters");
+        const densityInputVal = document.getElementById("densityInput").value;
+        density = densityInputVal === "" ? density : densityInputVal;
+        const _time = seconds + milliseconds/1000;
+        let result_table = document.getElementById("result_table");
+        const genTable = getResultTable(density, _time);
+        if (!result_table) {
+            parameters_section.appendChild(genTable);
+        } else {
+            parameters_section.replaceChild(genTable, result_table);
+        }
+    }
+    parameters.append(_container);
     mainFrame.append(cronometer);
     mainFrame.append(parameters);
     document.body.append(mainFrame);
     
+    setInterval(onTimeTableUpdate,10);
     chronometerDisplay = document.querySelector(`[data-chronometer]`)
 }
 
